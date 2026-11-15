@@ -33,6 +33,60 @@ python3 -m http.server 8091
 
 Los modelos de MediaPipe no se versionan por tamaño; el README indica cómo obtenerlos. En la prueba final la cámara USB de la UNO Q no fue detectada.
 
+<!-- ficha -->
+## Ficha de evaluación
+
+**Madurez global: 3.2/5**
+
+| Criterio | Nota | Evidencia |
+|---|---:|---|
+| Madurez | 2/5 | Demo funcional sin pruebas automatizadas; servicio systemd con reinicio automático y límites de cámara declarados. |
+| Reproducibilidad | 3/5 | Servidor estático y modelos locales; el gesto depende del navegador y de una cámara que el sistema vea. |
+| Documentación | 3/5 | README, datasheet y guía de desarrollador explican arquitectura, servicio y la limitación de la cámara. |
+| Honestidad de límites | 5/5 | Declara el SIGILL de MediaPipe, la falta de wheels para Python 3.13 y que la cámara USB no se detectó. |
+| Valor demostrativo | 3/5 | Demuestra inferencia en el cliente y CSS 3D sin GPU; el cubo solo gira en yaw, no resuelve piezas. |
+| Facilidad de despliegue | 3/5 | Se sirve con un servidor estático o systemd; en la placa falta host USB y conviene usar cámara IP. |
+
+Demostración de interacción sin contacto que usa el navegador para esquivar las limitaciones de la placa. Funciona como pieza didáctica; no es un producto ni tiene pruebas.
+
+## Lo que no funcionó
+
+### GestureCubeUNOQ — MediaPipe nativo aborta en la placa
+
+Los wheels aarch64 de MediaPipe 1.2.3 y 1.0.0 están compilados con LSE, extensión que el QRB2210 Cortex-A53 ARMv8.0 no implementa. La ejecución nativa termina con SIGILL y el mensaje compiled with lse enabled, but this feature is not available. Se movió la inferencia al navegador y el motor Python quedó como referencia protegida por try/except.
+
+### GestureCubeUNOQ — Sin wheels para Python 3.13
+
+La placa trae Python 3.13.5 y no existen wheels de MediaPipe 0.10.x para cp313 en aarch64. Compilar desde fuente se descartó por costo y mantenimiento. Tampoco se quiso arrastrar matplotlib, así que se inyectan stubs en sys.modules para satisfacer imports opcionales del entorno.
+
+### GestureCubeUNOQ — Cámara USB no disponible
+
+Limitación declarada: el único puerto USB-C estaba ocupado por el cable de datos y la placa, en modo dispositivo, no alimenta ni hostea periféricos. La cámara USB no se detectó. Se admite una cámara IP MJPEG por configuración, pero la prueba final se hizo sin captura local en la placa.
+
+## Preguntas típicas
+
+**¿Funciona sin cámara?**
+
+Puedes ver el cubo, pero no controlarlo por gesto.
+
+**¿Por qué no se detectó la cámara?**
+
+Fue una limitación del entorno probado. El README la declara en vez de ocultarla.
+
+**¿Usa WebGL?**
+
+El cubo es CSS 3D; MediaPipe usa su propio runtime.
+
+**¿Necesita Internet?**
+
+No, si los modelos están locales.
+
+**¿Puedo usar otra cámara?**
+
+Sí, si el navegador la ve y el sistema tiene permisos.
+
+<!-- /ficha -->
+
 ## Documentación
 
 - [`docs/datasheet.md`](docs/datasheet.md) — instalación, operación y límites.
@@ -40,11 +94,11 @@ Los modelos de MediaPipe no se versionan por tamaño; el README indica cómo obt
 - [`docs/REFERENCES.md`](docs/REFERENCES.md) — estándares, librerías y fuentes.
 - [`docs/index.html`](docs/index.html) — página del proyecto (GitHub Pages).
 
-## Alcance y honestidad
+## El proyecto en detalle
 
 <div align="center">
 
-## GestureCube · Arduino UNO Q
+### GestureCube · Arduino UNO Q
 
 **Un cubo Rubik 3D que gira con la mano. Visión artificial en vivo, 100 % offline, sobre una Arduino UNO Q.**
 
