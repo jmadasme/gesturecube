@@ -191,12 +191,14 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 
 </style>
 <link rel="stylesheet" href="assets/community.css?v=1">
+<link href="rec/player.css?v=1" rel="stylesheet"/>
 </head>
 <body>
 <header class="nav"><div class="wrap nav-in">
   <a class="brand" href="/"><span class="brand-mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span><span>jmadasme<span style="color:var(--accent)">.</span>portfolio</span></a>
   <nav class="nav-links">
-    <a href="#proyecto">Proyecto</a><a href="#versiones">Versiones</a><a href="#stack">Stack</a><a href="#docs">Docs</a><a href="#comunidad">Comunidad</a>
+    <a href="#proyecto">Proyecto</a><a href="#versiones">Versiones</a><a href="#stack">Stack</a><a href="#video">Video</a>
+<a href="#docs">Docs</a><a href="#comunidad">Comunidad</a>
     <a class="btn btn-ghost" style="padding:9px 15px" href="/arduino-unoq/">← Arduino</a>
   </nav>
 </div></header>
@@ -221,7 +223,46 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 
 <section class="stats"><div class="wrap stats-grid"><div class="stat"><div class="stat-num">1</div><div class="stat-label">versión</div></div><div class="stat"><div class="stat-num">MediaPipe</div><div class="stat-label">manos</div></div><div class="stat"><div class="stat-num">3D CSS</div><div class="stat-label">interfaz</div></div><div class="stat"><div class="stat-num">0</div><div class="stat-label">nube</div></div></div></section>
 
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">El concepto</div><h2>Qué es y por qué existe</h2></div><div class="rich reveal"><p>GestureCube es una demostración de interacción sin contacto: un cubo Rubik de 26 cubies dibujado con CSS 3D sigue el movimiento de la mano. La inferencia de manos corre en el navegador con MediaPipe Tasks Vision sobre WASM y WebGL, mientras la UNO Q sirve los archivos estáticos y el stream MJPEG. Funciona offline, sin CDN, y el servicio systemd lo reinicia ante fallos.</p><p>Está orientado a demos y experimentos de accesibilidad, no a un producto. La placa no ejecuta MediaPipe de forma nativa: el binario aarch64 aborta por instrucciones LSE que el Cortex-A53 de la UNO Q no admite. Por eso el motor Python queda como referencia y el trabajo real ocurre en el cliente. La cámara USB tampoco se detectó en la prueba final; hace falta un hub USB-C con alimentación o una cámara IP.</p></div></div></section><section class="section" id="versiones"><div class="wrap">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">El concepto</div><h2>Qué es y por qué existe</h2></div><div class="rich reveal"><p>GestureCube es una demostración de interacción sin contacto: un cubo Rubik de 26 cubies dibujado con CSS 3D sigue el movimiento de la mano. La inferencia de manos corre en el navegador con MediaPipe Tasks Vision sobre WASM y WebGL, mientras la UNO Q sirve los archivos estáticos y el stream MJPEG. Funciona offline, sin CDN, y el servicio systemd lo reinicia ante fallos.</p><p>Está orientado a demos y experimentos de accesibilidad, no a un producto. La placa no ejecuta MediaPipe de forma nativa: el binario aarch64 aborta por instrucciones LSE que el Cortex-A53 de la UNO Q no admite. Por eso el motor Python queda como referencia y el trabajo real ocurre en el cliente. La cámara USB tampoco se detectó en la prueba final; hace falta un hub USB-C con alimentación o una cámara IP.</p></div></div></section>
+<section class="section tight rec-section" id="video" style="--accent:#2E7DFF;--accent2:#14F195">
+<div class="wrap">
+<div class="rec-kicker">REC · VIDEO · 3:06</div>
+<h2 class="rec-h2">GestureCube: gestos de mano sobre un cubo 3D</h2>
+<p class="rec-lead">Servidor Python que captura una cámara USB, detecta manos con MediaPipe y traduce gestos en rotaciones de un cubo Rubik 3D, todo en local y sin frameworks web.</p>
+<div class="rec-banner">
+<span class="rec-banner-icon">📋</span>
+<strong>Puedes copiar y pegar los comandos del video desde el video !!!</strong>
+<span>Pausá, seleccioná el texto de la terminal y copiá.</span>
+</div>
+<div class="rec-shell">
+<div class="rec-bar"><i></i><i></i><i></i><span class="rec-title">GestureCube: gestos de mano sobre un cubo 3D · asciinema</span><span class="rec-rec"><b></b>REC</span></div>
+<div class="rec-screen-wrap">
+<div class="rec-screen" id="rec-screen"></div>
+<div class="rec-poster" id="rec-poster">
+<div class="rec-kicker">ASCIINEMA · 3:06</div>
+<h3>GestureCube: gestos de mano sobre un cubo 3D</h3>
+<p>Servidor Python que captura una cámara USB, detecta manos con MediaPipe y traduce gestos en rotaciones de un cubo Rubik 3D, todo en local y sin frameworks web.</p>
+<div class="rec-poster-meta">gesturecube · código real</div>
+<button class="rec-btn rec-primary" id="rec-start" type="button">▶ Reproducir</button>
+</div>
+</div>
+<div class="rec-controls">
+<button class="rec-btn rec-primary" id="rec-play" type="button">▶ Reproducir</button>
+<button class="rec-btn" id="rec-restart" type="button">↺ Reiniciar</button>
+<input class="rec-progress" id="rec-range" type="range" min="0" max="1000" value="0" aria-label="Progreso"/>
+<span class="rec-time" id="rec-time">0:00 / 3:06</span>
+<select class="rec-speed" id="rec-speed" aria-label="Velocidad"><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+<button class="rec-btn" id="rec-full" type="button" title="Pantalla completa">⛶</button>
+<button class="rec-btn" id="rec-copy" type="button">⧉ Copiar comandos</button>
+<a class="rec-download" href="rec/gesturecube.cast" download>descargar .cast</a>
+</div>
+</div>
+<p class="rec-note">Los fragmentos provienen del servidor y del motor reales; el modelo hand_landmarker.task se descarga aparte y no se versiona.</p>
+<div class="rec-chapters"><span class="rec-chip"><b>0:06</b> EL PROBLEMA</span><span class="rec-chip"><b>0:19</b> ARQUITECTURA</span><span class="rec-chip"><b>0:33</b> EL NÚCLEO</span><span class="rec-chip"><b>0:48</b> CÁMARA</span><span class="rec-chip"><b>1:06</b> OVERLAY</span><span class="rec-chip"><b>1:18</b> VIDEO</span><span class="rec-chip"><b>1:31</b> EVENTOS</span><span class="rec-chip"><b>1:43</b> MOTOR</span><span class="rec-chip"><b>1:57</b> DEDOS</span><span class="rec-chip"><b>2:10</b> ESTABILIDAD</span><span class="rec-chip"><b>2:26</b> BARRIDOS</span><span class="rec-chip"><b>2:42</b> CÓMO EJECUTARLO</span></div>
+</div>
+</section>
+
+<section class="section" id="versiones"><div class="wrap">
   <div class="section-head reveal"><div class="kicker">02 — Versiones</div><h2>La historia, completa.</h2><p class="section-sub">Cada carpeta conserva una etapa del proyecto. No se borraron las anteriores: se pusieron en contexto.</p></div>
   <div class="versions"><article class="version reveal">
   <div class="version-top"><h3>GestureCubeUNOQ</h3><span class="count">28 archivos</span></div>
@@ -280,5 +321,7 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <script>window.PORTFOLIO_COMMUNITY={account:"jmadasme",repo:"gesturecube",coinNamespace:"jmadasme-gesturecube-coins-v1",faqs:[{"q": "¿Funciona sin cámara?", "a": "Puedes ver el cubo, pero no controlarlo por gesto."}, {"q": "¿Por qué no se detectó la cámara?", "a": "Fue una limitación del entorno probado. El README la declara en vez de ocultarla."}, {"q": "¿Usa WebGL?", "a": "El cubo es CSS 3D; MediaPipe usa su propio runtime."}, {"q": "¿Necesita Internet?", "a": "No, si los modelos están locales."}, {"q": "¿Puedo usar otra cámara?", "a": "Sí, si el navegador la ve y el sistema tiene permisos."}]};</script>
 <script src="assets/community.js?v=2" defer></script>
 
+<script defer src="rec/gesturecube.cast.js?v=1"></script>
+<script defer src="rec/player.js?v=1"></script>
 </body>
 </html>
